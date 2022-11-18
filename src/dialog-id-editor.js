@@ -1,5 +1,5 @@
 import { SelectEditor } from "@json-editor/json-editor/src/editors/select";
-import { fetchDialogs } from "./api";
+import { fetchDialogs, fetchDialogStartMethods } from "./api";
 
 export class DialogIdEditor extends SelectEditor {
   preBuild () {
@@ -18,7 +18,16 @@ export class DialogIdEditor extends SelectEditor {
   }
 
   build() {
-    console.log("dialogid editor");
     super.build();
+  }
+}
+
+export class StartMethodEditor extends DialogIdEditor {
+  afterInputReady () {
+    fetchDialogStartMethods().then(result => {
+      const options = result;
+      this.theme.setSelectOptions(this.input, options, options)
+    });
+    super.afterInputReady()
   }
 }

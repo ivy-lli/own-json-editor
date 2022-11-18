@@ -5,6 +5,13 @@ export async function fetchDialogs() {
   return json
 }
 
+export async function fetchDialogStartMethods() {
+  const response = await fetch(getConfigUrl() + '/dialogIds/startMethods');
+  const json = await response.json();
+  console.log("received "+JSON.stringify(json))
+  return json
+}
+
 export async function fetchConfig() {
   const response = await fetch(getConfigUrl());
   const json = await response.json();
